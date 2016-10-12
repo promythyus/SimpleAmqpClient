@@ -1,6 +1,8 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 
 PROJECT(SimpleAmqpClient)
+
+set(VERSION "r7783033")
 
 # Follow all steps below in order to calculate new ABI version when updating the library
 # NOTE: THIS IS UNRELATED to the actual project version
@@ -184,6 +186,17 @@ set(prefix ${CMAKE_INSTALL_PREFIX})
 set(exec_prefix "\${prefix}")
 set(libdir "\${exec_prefix}/lib")
 set(includedir "\${prefix}/include")
+
+set(CPACK_PACKAGE_VERSION ${VERSION})
+set(CPACK_GENERATOR "RPM")
+set(CPACK_PACKAGE_NAME "SimpleAmqpClient")
+set(CPACK_PACKAGE_RELEASE 1)
+set(CPACK_PACKAGE_CONTACT "aaron@modernwageringsystems.com")
+set(CPACK_PACKAGE_VENDOR "Modern Wagering Systems")
+set(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${CPACK_PACKAGE_RELEASE}.${CMAKE_SYSTEM_PROCESSOR}")
+set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/local" "/usr/local/include" "/usr/local/lib")
+include(CPack)
 
 foreach(_lib ${Boost_LIBRARIES})
     get_filename_component(_LIBPATH ${_lib} PATH)
