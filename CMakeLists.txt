@@ -2,7 +2,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 
 PROJECT(SimpleAmqpClient)
 
-set(VERSION "r7783033")
+execute_process(COMMAND git log --pretty=format:%h -n 1 OUTPUT_VARIABLE VERSION)
+message(STATUS "VERSION: " ${VERSION})
 
 # Follow all steps below in order to calculate new ABI version when updating the library
 # NOTE: THIS IS UNRELATED to the actual project version
